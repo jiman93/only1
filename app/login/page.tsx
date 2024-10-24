@@ -7,16 +7,13 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-
-const loginSchema = z.object({
-  // email: z.string().email("Invalid email address"),
-  email: z.string(),
-});
+import { loginSchema } from "../schema";
 
 type LoginFormData = z.infer<typeof loginSchema>;
 
 interface LoginResponse {
   result: boolean;
+  message?: string; // Optionally handle error messages like "User not found"
 }
 
 const LoginPage = () => {
@@ -45,8 +42,14 @@ const LoginPage = () => {
       credentials: "include",
     });
 
+    // Handle different statuses returned by the API
     if (!response.ok) {
-      throw new Error("Invalid login credentials");
+      const resData = await response.json();
+      if (resData.message === "User not found") {
+        throw new Error("User not found");
+      } else {
+        throw new Error("Invalid login credentials");
+      }
     }
 
     return response.json();
@@ -57,8 +60,8 @@ const LoginPage = () => {
     onSuccess: () => {
       router.push("/access-management");
     },
-    onError: () => {
-      setError("Invalid login credentials");
+    onError: (e: Error) => {
+      setError(e.message);
     },
   });
 
