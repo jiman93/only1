@@ -23,7 +23,4 @@ export const inviteSchema = z.object({
   status: z.enum(["Pending", "Active", "Trashed"]), // Enum for the status field
   createdAt: z.string(), // Validate as ISO string for date
   delegationExpiry: z.number(), // Validate as ISO string for date
-  specifiedDelegationDays: z.array(
-    z.enum(["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"])
-  ), // Array of valid days
 });

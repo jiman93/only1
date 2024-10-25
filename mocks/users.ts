@@ -10,7 +10,7 @@ export const users: User[] = [
   {
     id: "2",
     email: "user2@g.com",
-    name: "Jane Doe",
+    name: "Jane Trevor",
     verified: false,
   },
   {

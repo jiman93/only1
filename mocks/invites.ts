@@ -1,76 +1,39 @@
 import { Invite } from "@/types/model";
+import { v4 as uuidv4 } from "uuid";
 
-export const Invites: Invite[] = [
-  {
-    id: "567178eb-5143-4ac0-b21c-f67988c203de",
-    inviterId: "1",
-    inviteeId: "3",
-    permissions: {
-      canReadPosts: false,
-      canWritePosts: false,
-      canReadMessages: true,
-      canWriteMessages: false,
-      canReadProfile: true,
-      canWriteProfile: true,
-    },
-    status: "Pending",
-    createdAt: "2024-10-24T23:59:59Z",
-    updatedAt: "2024-10-24T23:59:59Z",
-    delegationExpiry: 7,
-    specifiedDelegationDays: ["Monday"],
-  },
-  {
-    id: "d5a189b1-846d-4500-8f0e-af68cf0f2a04",
-    inviterId: "2",
-    inviteeId: "1",
-    permissions: {
-      canReadPosts: true,
-      canWritePosts: false,
-      canReadMessages: true,
-      canWriteMessages: false,
-      canReadProfile: true,
-      canWriteProfile: false,
-    },
-    status: "Pending",
-    createdAt: "2024-10-24T23:59:59Z",
-    updatedAt: "2024-10-24T23:59:59Z",
-    delegationExpiry: 14,
-    specifiedDelegationDays: [],
-  },
-  {
-    id: "c6205a71-042f-4f58-b0c7-c38a41de3399",
-    inviterId: "1",
-    inviteeId: "2",
-    permissions: {
-      canReadPosts: true,
-      canWritePosts: false,
-      canReadMessages: true,
-      canWriteMessages: false,
-      canReadProfile: true,
-      canWriteProfile: false,
-    },
-    status: "Active",
-    createdAt: "2024-10-22T23:59:59Z",
-    updatedAt: "2024-10-22T23:59:59Z",
-    delegationExpiry: 5,
-    specifiedDelegationDays: [],
-  },
-  {
-    id: "b656209e-aefe-494c-aef0-02f6c4204c19",
-    inviterId: "2",
-    inviteeId: "1",
-    permissions: {
-      canReadPosts: true,
-      canWritePosts: false,
-      canReadMessages: true,
-      canWriteMessages: false,
-      canReadProfile: true,
-      canWriteProfile: false,
-    },
-    status: "Active",
-    createdAt: "2024-10-24T23:59:59Z",
-    updatedAt: "2024-10-24T23:59:59Z",
-    delegationExpiry: 100,
-    specifiedDelegationDays: ["Monday"],
-  },
-];
+const permissions = {
+  canReadPosts: true,
+  canWritePosts: false,
+  canReadMessages: true,
+  canWriteMessages: false,
+  canReadProfile: true,
+  canWriteProfile: false,
+};
+
+// List of user IDs from your users array
+const userIds = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"];
+
+// Generate 100 invites
+export const Invites: Invite[] = [];
+
+for (let i = 0; i < 100; i++) {
+  // Randomly select inviterId and inviteeId
+  let inviterId = userIds[Math.floor(Math.random() * userIds.length)];
+  let inviteeId = userIds[Math.floor(Math.random() * userIds.length)];
+
+  // Ensure inviter and invitee are not the same user
+  while (inviterId === inviteeId) {
+    inviteeId = userIds[Math.floor(Math.random() * userIds.length)];
+  }
+
+  Invites.push({
+    id: uuidv4(),
+    inviterId,
+    inviteeId,
+    permissions,
+    status: i % 3 === 0 ? "Pending" : i % 3 === 1 ? "Active" : "Trashed",
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+    delegationExpiry: Math.floor(Math.random() * 30) + 1,
+  });
+}

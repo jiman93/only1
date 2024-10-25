@@ -23,7 +23,7 @@ export type Invite = {
   createdAt: string; // Timestamp of when the invite was created
   updatedAt: string; // Timestamp of when the invite was last updated
   delegationExpiry?: number; // Optional expiration date for the invite
-  specifiedDelegationDays: DelegationDay[];
+  specifiedDelegationDays?: DelegationDay[];
 };
 
 export type DelegationDay =

@@ -1,6 +1,4 @@
 import { NextResponse } from "next/server";
-import { Invite } from "@/types/model"; // Import your Invite type
-import { Invites } from "@/mocks/invites";
 import { entries } from "../route";
 
 // API route to get a single invite by its id
