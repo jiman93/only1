@@ -24,13 +24,11 @@ export const UpdateUserPermission = ({
 }) => {
   const queryClient = useQueryClient();
 
-  console.log(isReadonly);
-  // Set up React Hook Form with Zod validation
   const {
     handleSubmit,
     control,
     reset,
-    formState: { errors },
+    formState: { errors, isValid },
   } = useForm<SendInviteFormData>({
     resolver: zodResolver(inviteSchema),
     defaultValues: invite,
@@ -60,12 +58,14 @@ export const UpdateUserPermission = ({
     mutationFn: send,
     onSuccess: (_, variables) => {
       // Refetch the invites query after mutation success
-      queryClient.invalidateQueries({ queryKey: ["invites", variables.inviterId] });
+      queryClient.invalidateQueries({ queryKey: ["sentInvites", variables.inviterId] });
       queryClient.invalidateQueries({ queryKey: ["invById", variables.id] });
       reset(); // Reset the form after success
       close();
     },
   });
+
+  console.log("isvalid", isValid);
 
   return (
     <>

@@ -43,12 +43,10 @@ export const CreateUserPermission = () => {
       status: "Pending",
       createdAt: "",
       delegationExpiry: 0,
-      specifiedDelegationDays: [],
     },
   });
 
   const send = async (data: SendInviteFormData): Promise<Invite[]> => {
-    console.log("sending", data);
     const response = await fetch("/api/invites", {
       method: "POST",
       headers: {
@@ -76,7 +74,7 @@ export const CreateUserPermission = () => {
     mutationFn: send,
     onSuccess: () => {
       reset(); // Reset the form after success
-      queryClient.invalidateQueries({ queryKey: ["invites", currentUser.id] });
+      queryClient.invalidateQueries({ queryKey: ["sentInvites", currentUser.id] });
       setSelectedUser(null); // Clear the selected user
     },
   });

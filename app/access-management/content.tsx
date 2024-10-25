@@ -39,7 +39,7 @@ const Container = ({ currentUser }: { currentUser: User }) => {
 
   return (
     <Group className="container mx-auto p-4 space-y-8">
-      <InvitationSent invites={sent} />
+      <InvitationSent />
       <InvitationReceived invites={received} />
     </Group>
   );
