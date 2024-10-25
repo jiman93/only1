@@ -1,5 +1,5 @@
+import { entries } from "@/app/entries";
 import { NextResponse } from "next/server";
-import { entries } from "../route";
 
 // API route to get a single invite by its id
 export async function GET(request: Request) {

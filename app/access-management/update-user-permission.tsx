@@ -65,7 +65,7 @@ export const UpdateUserPermission = ({
     },
   });
 
-  console.log("isvalid", isValid);
+  console.log("UpdateUserPermission - isvalid", isValid);
 
   return (
     <>

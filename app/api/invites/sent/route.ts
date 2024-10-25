@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
-import { entries } from "../route";
 import { Invite } from "@/types/model";
+import { entries } from "@/app/entries";
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);

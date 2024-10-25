@@ -1,9 +1,6 @@
 import { NextResponse } from "next/server";
 import { Invite } from "@/types/model"; // Import your Invite type
-import { Invites } from "@/mocks/invites";
-
-// In-memory storage for mock invites
-export let entries: Invite[] = [...Invites];
+import { entries } from "@/app/entries";
 
 // API route to filter invites by userId
 export async function GET(request: Request) {
