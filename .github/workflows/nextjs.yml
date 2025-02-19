@@ -66,8 +66,7 @@ jobs:
             ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json', '**/yarn.lock') }}-
 
       - name: Install Dependencies
-        run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
-
+        run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }} --force
       - name: Build and Export Next.js Site
         run: |
           ${{ steps.detect-package-manager.outputs.runner }} next build
@@ -76,7 +75,7 @@ jobs:
       - name: Upload Artifact for Deployment
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./out  # GitHub Pages requires the static site output to be in ./out
+          path: ./out # GitHub Pages requires the static site output to be in ./out
 
   # Deployment job
   deploy:
